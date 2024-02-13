@@ -13,7 +13,7 @@ public class ConferenceEntity {
     private Long id;
     private String conferenceName;
     private LocalDateTime conferenceDateTime;
-    private String time;
+    private String duration;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private UserEntity user;
@@ -24,5 +24,37 @@ public class ConferenceEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public String getConferenceName() {
+        return conferenceName;
+    }
+
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
+    }
+
+    public LocalDateTime getConferenceDateTime() {
+        return conferenceDateTime;
+    }
+
+    public void setConferenceDateTime(LocalDateTime conferenceDateTime) {
+        this.conferenceDateTime = conferenceDateTime;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String time) {
+        this.duration = time;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

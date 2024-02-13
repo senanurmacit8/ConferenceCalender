@@ -7,7 +7,8 @@ import lombok.Data;
 public class Conference {
 
     private String conferenceName;
-    private String time;
-    private User user;
+    private String conferenceDateTime;
+    private String duration;
+    private String userName;
 
 }
