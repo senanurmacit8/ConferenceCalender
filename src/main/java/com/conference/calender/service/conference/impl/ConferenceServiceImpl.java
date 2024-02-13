@@ -39,5 +39,19 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     }
 
+    public void deleteConference(Conference conference,Optional<UserEntity> userEntity){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(conference.getConferenceDateTime(), formatter);
+
+
+        ConferenceEntity entity = new ConferenceEntity();
+        entity.setConferenceName(conference.getConferenceName());
+        entity.setConferenceDateTime(dateTime);
+        entity.setDuration(conference.getDuration());
+        entity.setUser(userEntity.get());
+
+        repository.delete(entity);
+    }
+
 
 }

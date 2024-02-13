@@ -50,8 +50,18 @@ public class CalenderController {
     }
 
     @PostMapping(value = "/deleteConference")
-    public void deleteConference(@RequestBody Conference conference){
+    public ResponseEntity<String> deleteConference(@RequestBody Conference conference){
 
+        Optional<UserEntity> userEntity = userService.getUserByName(conference.getUserName());
+
+        if (!userEntity.isPresent()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    "The userName not found."
+            );
+        }
+        service.deleteConference(conference,userEntity);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("deleted");
     }
 
     @GetMapping(value = "/listConferences")

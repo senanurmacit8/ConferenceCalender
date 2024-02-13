@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-
     public Optional<UserEntity> getUserByName (String userName){
         Optional<UserEntity> userEntity = userRepository.findByName(userName);
         return userEntity;
