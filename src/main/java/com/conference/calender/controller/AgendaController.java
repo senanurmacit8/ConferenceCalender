@@ -39,7 +39,8 @@ public class AgendaController {
    @GetMapping( "/fixDummyData")
     public ResponseEntity<String> fixDummyData()  {
        repository.updateAll();
-       return ResponseEntity.status(HttpStatus.OK).body("The status of the conference records are updated... ");
+       return ResponseEntity.status(HttpStatus.OK)
+               .body("The status of the conference records are updated... ");
 
     }
 

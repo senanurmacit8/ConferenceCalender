@@ -12,10 +12,6 @@ class UserControllerTest {
     }
 
     @Test
-    void helloUser() {
-    }
-
-    @Test
     void createUser() {
     }
 
