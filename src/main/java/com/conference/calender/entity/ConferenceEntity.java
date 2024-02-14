@@ -1,19 +1,22 @@
 package com.conference.calender.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "T_CONFERENCE")
 public class ConferenceEntity {
-
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String conferenceName;
     private LocalDateTime conferenceDateTime;
-    private String duration;
+    private Integer conferenceDuration;
+
+    private String conferenceTopic;
+
+    private Integer status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private UserEntity user;
@@ -42,12 +45,12 @@ public class ConferenceEntity {
         this.conferenceDateTime = conferenceDateTime;
     }
 
-    public String getDuration() {
-        return duration;
+    public Integer getConferenceDuration() {
+        return conferenceDuration;
     }
 
-    public void setDuration(String time) {
-        this.duration = time;
+    public void setConferenceDuration(Integer conferenceDuration) {
+        this.conferenceDuration = conferenceDuration;
     }
 
     public UserEntity getUser() {
@@ -56,5 +59,21 @@ public class ConferenceEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public String getConferenceTopic() {
+        return conferenceTopic;
+    }
+
+    public void setConferenceTopic(String conferenceTopic) {
+        this.conferenceTopic = conferenceTopic;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

@@ -1,8 +1,11 @@
 package com.conference.calender.controller;
 
+import com.conference.calender.exception.NotFoundException;
 import com.conference.calender.model.User;
 import com.conference.calender.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    UserServiceImpl userServiceImpl;
 
     @GetMapping(value = "/hello")
     public List<User> helloUser(){
@@ -31,36 +34,33 @@ public class UserController {
 
     }
 
-
     @PostMapping(value = "/createUser")
 
     public void createUser(@RequestBody User user){
 
-
-        userService.createUser(user);
-
+        userServiceImpl.createUser(user);
     }
 
 
     @GetMapping(value = "/user")
-    public User getUser(@RequestBody Long userId){
+    public ResponseEntity<User> getUser(@RequestBody Long userId) throws NotFoundException {
 
-       return  userService.getUser(userId);
+        User user = this.userServiceImpl.getUserById(userId);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
 
     }
-
 
     @GetMapping(value = "/users")
     public List<User> getUserList(){
 
-        return userService.getUserList();
+        return userServiceImpl.getUserList();
 
     }
 
     @DeleteMapping(value = "/deleteUser")
     public void deleteUser(User user){
 
-        userService.deleteUser(user);
+        userServiceImpl.deleteUser(user);
     }
 
 

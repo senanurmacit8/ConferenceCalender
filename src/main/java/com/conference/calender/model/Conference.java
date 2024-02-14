@@ -8,7 +8,7 @@ public class Conference {
 
     private String conferenceName;
     private String conferenceDateTime;
-    private String duration;
+    private Integer duration;
     private String userName;
 
 }

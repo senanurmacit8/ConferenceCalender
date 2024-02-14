@@ -1,0 +1,7 @@
+
+w
+java:S41653"aRemove this useless assignment; "job" already holds the assigned value along all execution paths.(¹âªÀ
+M
+java:S18543"7Remove this useless assignment to local variable "job".(¹âªÀ
+E
+java:S16563"/Remove or correct this useless self-assignment.(¹âªÀ

@@ -2,9 +2,11 @@ package com.conference.calender.service.impl;
 
 
 import com.conference.calender.entity.UserEntity;
+import com.conference.calender.exception.NotFoundException;
 import com.conference.calender.model.User;
 import com.conference.calender.repository.user.UserRepository;
 import com.conference.calender.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,22 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    ModelMapper modelMapper;
+
+    @Autowired
     UserRepository userRepository;
 
+
+    // update it with UserDto
+    public User getUserByIdwithMapper(Long userId) {
+        UserEntity userEntity = this.userRepository.findById(userId).get();
+
+        User user = this.modelMapper.map(userEntity, User.class);
+
+        return user;
+    }
+
+    @Override
     public void createUser(User user){
 
         UserEntity entity = new UserEntity();
@@ -34,6 +50,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
     public void deleteUser(User user){
         UserEntity userEntity = new UserEntity();
         userEntity.setName(user.getName());
@@ -44,6 +61,7 @@ public class UserServiceImpl implements UserService {
        userRepository.delete (userEntity);
     }
 
+    @Override
     public List<User> getUserList(){
         List<UserEntity> userEntityList = userRepository.findAll();
 
@@ -57,7 +75,8 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    public User getUser(Long userId){
+    @Override
+    public User getUserById(Long userId) throws NotFoundException {
         User user = null;
         Optional<UserEntity> userEntityOptional = userRepository.findById(userId);
 
@@ -68,10 +87,13 @@ public class UserServiceImpl implements UserService {
                     userEntity.getLastname(),
                     userEntity.getJob(),
                     userEntity.getCountry());
+        }else {
+            throw new NotFoundException("The user is not exist. UserId : " + userId);
         }
         return user;
     }
 
+    @Override
     public Optional<UserEntity> getUserByName (String userName){
         Optional<UserEntity> userEntity = userRepository.findByName(userName);
         return userEntity;
