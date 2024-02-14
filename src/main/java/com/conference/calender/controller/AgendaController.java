@@ -30,12 +30,17 @@ public class AgendaController {
         List<List<Conference>> conferenceList ;
             try {
                 conferenceList = conferencePlanBusinessLogicServiceImpl.getAgendaList();
-                repository.updateAll();
 
             }catch (NotFoundException e){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
             }
         return ResponseEntity.status(HttpStatus.OK).body(conferenceList);
+    }
+   @GetMapping( "/fixDummyData")
+    public ResponseEntity<String> fixDummyData()  {
+       repository.updateAll();
+       return ResponseEntity.status(HttpStatus.OK).body("The status of the conference records are updated... ");
+
     }
 
 }
