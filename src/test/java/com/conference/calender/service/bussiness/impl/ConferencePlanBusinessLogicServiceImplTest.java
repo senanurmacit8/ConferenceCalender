@@ -1,15 +1,11 @@
-package com.conference.calender.service.bussiness;
+package com.conference.calender.service.bussiness.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-@RunWith(SpringRunner.class)
-class ConferencePlanBusinessLogicServiceTest {
+class ConferencePlanBusinessLogicServiceImplTest {
 
     @BeforeEach
     void setUp() {
@@ -17,8 +13,10 @@ class ConferencePlanBusinessLogicServiceTest {
 
     @Test
     void presentationListAlgorithm() {
+    }
 
-
+    @Test
+    void getAgendaList() {
     }
 
     @Test

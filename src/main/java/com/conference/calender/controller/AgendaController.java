@@ -3,7 +3,8 @@ package com.conference.calender.controller;
 
 import com.conference.calender.exception.NotFoundException;
 import com.conference.calender.model.Conference;
-import com.conference.calender.service.bussiness.ConferencePlanBusinessLogicService;
+import com.conference.calender.repository.conference.ConferenceRepository;
+import com.conference.calender.service.bussiness.impl.ConferencePlanBusinessLogicServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,18 @@ import java.util.List;
 public class AgendaController {
 
     @Autowired
-    private ConferencePlanBusinessLogicService conferencePlanBusinessLogicService;
+    private ConferencePlanBusinessLogicServiceImpl conferencePlanBusinessLogicServiceImpl;
+
+    @Autowired
+    ConferenceRepository repository;
 
     @GetMapping( "/getAgendaList")
-    public ResponseEntity<List<Conference>> showAgenda()  {
-        List<Conference> conferenceList ;
+    public ResponseEntity<List<List<Conference>>> showAgenda()  {
+        List<List<Conference>> conferenceList ;
             try {
-                conferenceList = conferencePlanBusinessLogicService.getAgendaList();
+                conferenceList = conferencePlanBusinessLogicServiceImpl.getAgendaList();
+                repository.updateAll();
+
             }catch (NotFoundException e){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
             }
